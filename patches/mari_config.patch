@@ -1,0 +1,84 @@
+Index: dwm-patches/dwm/config.def.h
+===================================================================
+--- dwm-patches.orig/dwm/config.def.h	2015-06-12 16:09:36.643394032 +0530
++++ dwm-patches/dwm/config.def.h	2015-06-12 16:33:31.499418943 +0530
+@@ -2,20 +2,22 @@
+ 
+ /* appearance */
+ static const char *fonts[] = {
+-    "DejaVu Sans Mono for Powerline:size=8.5:antialias=true:autohint=true",
++    "sansation:size=10.5",
++    "Bitstream Vera Sans Mono:size=10.5",
++    "tewi:size=14",
+     "Sans:size=10.5",
+     "VL Gothic:size=10.5",
+     "WenQuanYi Micro Hei:size=10.5",
+ };
+-static const char dmenufont[]       = "DejaVu Sans Mono for Powerline:size=8.5:antialias=true:autohint=true";
++static const char dmenufont[]       = "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*";
+ static const char normbordercolor[] = "#444444";
+ static const char normbgcolor[]     = "#222222";
+ static const char normfgcolor[]     = "#bbbbbb";
+ static const char selbordercolor[]  = "#ff0000";
+ static const char selbgcolor[]      = "#005577";
+ static const char selfgcolor[]      = "#eeeeee";
+-static const char floatnormbordercolor[] = "#885599";
+-static const char floatselbordercolor[]  = "#ff0000";
++static const char floatnormbordercolor[] = "#222222";
++static const char floatselbordercolor[]  = "#A5C085";
+ static const unsigned int borderpx  = 1;        /* border pixel of windows */
+ static const unsigned int snap      = 32;       /* snap pixel */
+ static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+@@ -34,15 +36,8 @@
+ 	 *	WM_NAME(STRING) = title
+ 	 */
+ 	/* class      instance    title       tags mask     isfloating   monitor */
+-	{ "Firefox",  NULL,       NULL,       0,            False,       -1 },
+-	{ "Pidgin",   NULL,       NULL,       0,            True,        -1 },
+-	{ "Skype",    NULL,       NULL,       0,            True,        -1 },
+-	{ "Kio_uiserver", NULL,   NULL,       0,            True,        -1 },
+-	{ "Xchat",    NULL,       NULL,       1,            True,        -1 },
+-	{ "Hexchat",  NULL,       NULL,       1,            True,        -1 },
+-	{ "Jitsi",    NULL,       NULL,       1,            True,        -1 },
+-	{ "Rainlendar2", NULL,    NULL,       1,            True,        -1 },
+-	{ NULL, "Scratchpad",     NULL,       1,            True,        -1 },
++	{ "Gimp",     NULL,       NULL,       0,            True,        -1 },
++	{ "Firefox",  NULL,       NULL,       1 << 8,       False,       -1 },
+ };
+ 
+ /* layout(s) */
+@@ -52,15 +47,16 @@
+ 
+ #include "gaplessgrid.c"
+ static const Layout layouts[] = {
++    /* first entry is default */
+ 	/* symbol     arrange function */
+-	{ "[]=",      tile },    /* first entry is default */
+-	{ "><>",      NULL },    /* no layout function means floating behavior */
++	{ "[#]",      gaplessgrid },
++	{ "[]=",      tile },
+ 	{ "[M]",      monocle },
+-	{ "+++",      gaplessgrid },
++	{ "><>",      NULL },    /* no layout function means floating behavior */
+ };
+ 
+ /* key definitions */
+-#define MODKEY Mod4Mask
++#define MODKEY Mod1Mask
+ #define TAGKEYS(KEY,TAG) \
+ 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
+ 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
+@@ -101,10 +97,10 @@
+ 	{ Mod1Mask,                     XK_Tab,    swapfocus,      {0} },
+ 	{ MODKEY,                       XK_Tab,    view,           {0} },
+ 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
+-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
+-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
++	{ MODKEY,                       XK_g,      setlayout,      {.v = &layouts[0]} },
++	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[1]} },
+ 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+-	{ MODKEY,                       XK_g,      setlayout,      {.v = &layouts[3]} },
++	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[3]} },
+ 	{ MODKEY,                       XK_space,  toggleview_focus, {.ui = 1} },
+ 	{ MODKEY|ControlMask,           XK_space,  setlayout,      {0} },
+ 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
